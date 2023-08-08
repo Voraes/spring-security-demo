@@ -17,6 +17,7 @@ public class ApplicationUser implements UserDetails {
     @Column(name = "user_id")
     private Long userId;
 
+    @Column(unique = true)
     private String username;
 
     private String password;
@@ -28,6 +29,8 @@ public class ApplicationUser implements UserDetails {
             inverseJoinColumns = {@JoinColumn(name = "role_id")}
     )
     private Set<Role> authorities;
+
+    //Methods:
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
