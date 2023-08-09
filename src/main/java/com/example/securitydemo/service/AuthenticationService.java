@@ -4,14 +4,12 @@ import com.example.securitydemo.model.ApplicationUser;
 import com.example.securitydemo.model.Role;
 import com.example.securitydemo.repository.RoleRepository;
 import com.example.securitydemo.repository.UserRepository;
-import jakarta.persistence.GeneratedValue;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @Service
 @Transactional
@@ -31,7 +29,10 @@ public class AuthenticationService {
 
     public ApplicationUser registerUser(String username, String password) {
         String encodedPassword = passwordEncoder.encode(password);
-        Role userRole = roleRepository.findByAuthority("USER").get();
+        //Role userRole = roleRepository.findByAuthority("USER").get();
+
+        Role userRole = new Role();
+        userRole.setAuthority("USER");
 
         Set<Role> authorities = new HashSet<>();
         authorities.add(userRole);
